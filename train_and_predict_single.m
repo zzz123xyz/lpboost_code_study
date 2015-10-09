@@ -70,9 +70,9 @@ if exist(done_file,'file')
 
     return;
 end
-if nargout>0
-    return;
-end
+% if nargout>0  %%%dont know happens here????????????
+%     return;
+% end
 
 
 %

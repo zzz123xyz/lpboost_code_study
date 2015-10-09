@@ -25,7 +25,7 @@ load_settings;
 % creating directory to write predictions in 
 %
 str = strrep(strrep(splitfile,'splits/',''),'.mat','');
-preddir = ['/scratch_net/biwidl07/projects/caltech/mclp_score/'];
+preddir = ['mclp_score/'];
 preddir = [preddir,str,'/'];
 
 %
@@ -51,10 +51,10 @@ load(splitfile);
 load(strrep(splitfile,'.mat','_cvsplit.mat'),'split');
 
 str = strrep(strrep(splitfile,'splits/',''),'.mat','');
-combdir = ['/scratch_net/biwidl07/projects/caltech/mclp_score/',str];
+combdir = ['mclp_score/',str];
 combdir = [combdir,'/combination',num2str(combnum)];
 
-chainfile = ['/scratch_net/biwidl07/projects/caltech/mclp_jobs/',str];
+chainfile = ['mclp_jobs/',str];
 if weight_sharing==0, chainfile = [chainfile,'_combination',num2str(combnum),'_2ndstage_lpB.txt'];
 else, chainfile = [chainfile,'_combination',num2str(combnum),'_2ndstage_lpbeta.txt'];end
 
@@ -134,7 +134,7 @@ fclose(fid);
 fid = fopen(chainfile,'w');
 
 nu = bestnu;
-mclpbin = ['/scratch_net/biwidl07/projects/caltech/code/mclp/mclp_script --solver mosek --weight_sharing ',num2str(weight_sharing)];
+mclpbin = ['code/mclp/mclp_script --solver mosek --weight_sharing ',num2str(weight_sharing)];
 outfile = [combdir,'/2ndstage_',num2str(weight_sharing),'.txt'];
 mclpbin = [mclpbin,' --nu ',num2str(nu)];
 mclpbin = [mclpbin,' --train ',trainfile];

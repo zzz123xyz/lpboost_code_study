@@ -23,7 +23,7 @@ load_settings;
 % creating directory to write predictions in 
 %
 str = strrep(strrep(splitfile,'splits/',''),'.mat','');
-preddir = ['/scratch_net/biwidl07/projects/caltech/mclp_score/'];
+preddir = ['mclp_score/'];
 preddir = [preddir,str,'/'];
 
 %
@@ -56,11 +56,11 @@ end
 load(cvsplitfile,'split');
 
 str = strrep(strrep(splitfile,'splits/',''),'.mat','');
-combdir = ['/scratch_net/biwidl07/projects/caltech/mclp_score/',str];
+combdir = ['mclp_score/',str];
 combdir = [combdir,'/combination',num2str(combnum)];
 system(['mkdir -p ',combdir]);
 
-chainfile = ['/scratch_net/biwidl07/projects/caltech/mclp_jobs/',str];
+chainfile = ['mclp_jobs/',str];
 chainfile = [chainfile,'_combination',num2str(combnum),'.txt'];
 
 if weight_sharing==1
@@ -94,7 +94,7 @@ fid = fopen(chainfile,'w');
 if fid<0, error('could not open file');end
 for n=1:numel(nus)
     for f=1:numel(split.train_ind)
-	mclpbin = ['/scratch_net/biwidl07/projects/caltech/code/mclp/mclp_script --solver mosek --weight_sharing ',num2str(weight_sharing)];
+	mclpbin = ['code/mclp/mclp_script --solver mosek --weight_sharing ',num2str(weight_sharing)];
 	crossv_file = [combdir,'/fold',num2str(f),'.txt'];
 	outfile = [combdir,'/fold',num2str(f),'_',num2str(nus(n)),'_',num2str(weight_sharing),'.txt'];
 	mclpbin = [mclpbin,' --nu ',num2str(nus(n))];
